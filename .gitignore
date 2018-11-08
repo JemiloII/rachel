@@ -1,3 +1,4 @@
 .idea
+*.iml
 config/local*.json
 node_modules
