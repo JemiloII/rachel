@@ -13,7 +13,7 @@ bot.on('ready', async () => {
     }
 });
 
-bot.on('message', async (reaction, user) => {
+bot.on('message', async (message) => {
     if (message.author.bot) {
         return;
     }
@@ -28,23 +28,13 @@ bot.on('message', async (reaction, user) => {
 });
 
 bot.on('messageReactionAdd', async (reaction, user) => {
-    console.log('called');
+    console.log('add', reaction, user);
 
 });
 
-bot.on('messageReactionRemove', async reaction => {
-    console.log('called');
-    if (reaction.author.bot) {
-        return;
-    }
-
-    console.log(reaction.channel.name);
-    console.log(`${reaction.author.username}: ${reaction.content}`);
-
-    if (reaction.content === 'ping') {
-        reaction.reply('Pong!');
-        console.log(`${bot.user.username}: Pong!`);
-    }
+bot.on('messageReactionRemove', async (reaction, user) => {
+    console.log('remove', reaction, user);
 });
 
-bot.login(config.get('token'));
+bot.login(config.get('token'))
+    .catch(error => console.error('Failed to login!', error));
