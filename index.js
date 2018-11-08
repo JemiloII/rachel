@@ -29,11 +29,17 @@ bot.on('message', async (message) => {
 
 bot.on('messageReactionAdd', async (reaction, user) => {
     console.log('add', reaction, user);
-
 });
 
 bot.on('messageReactionRemove', async (reaction, user) => {
     console.log('remove', reaction, user);
+});
+
+bot.on('guildMemberAdd', member => {
+    const channel = member.guild.channels.find(ch => ch.name === 'registration-room');
+    if (channel) {
+        channel.send(`Welcome to the server, ${member}`);
+    }
 });
 
 bot.login(config.get('token'))
