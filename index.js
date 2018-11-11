@@ -1,6 +1,9 @@
+const bible = require('./lib/bible');
 const config = require('config');
 const Discord = require('discord.js');
 const bot = new Discord.Client({disableEveryone: true});
+
+bible.setClient(bot);
 
 bot.on('ready', async () => {
     console.log(`Logged in as ${bot.user.tag}!`);
@@ -25,13 +28,18 @@ bot.on('message', async (message) => {
         message.reply('Pong!');
         console.log(`${bot.user.username}: Pong!`);
     }
+
+    if (message.content.startsWith('--verse')) {
+        bible.sendVerse(message);
+    }
+
 });
 
-bot.on('messageReactionAdd', async (reaction, user) => {
+bot.on('messageReactionAdd', (reaction, user) => {
     console.log('add', reaction, user);
 });
 
-bot.on('messageReactionRemove', async (reaction, user) => {
+bot.on('messageReactionRemove', (reaction, user) => {
     console.log('remove', reaction, user);
 });
 
@@ -42,5 +50,5 @@ bot.on('guildMemberAdd', member => {
     }
 });
 
-bot.login(config.get('token'))
+bot.login(config.get('discord.token'))
     .catch(error => console.error('Failed to login!', error));

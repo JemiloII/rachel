@@ -1,3 +1,6 @@
 {
-  "token": "your-bot-token-here"
+  "token": "your-discord-token-here",
+  "bible": {
+    "key": "your-scripture.api.bible-key"
+  }
 }
