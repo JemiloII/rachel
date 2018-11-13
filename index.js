@@ -30,8 +30,8 @@ bot.on('message', async (message) => {
     console.log(`${message.author.username}: ${message.content}`);
 
     if (message.content === 'ping') {
-        message.reply('Pong!');
-        console.log(`${bot.user.username}: Pong!`);
+        message.reply('pong');
+        console.log(`${bot.user.username}: pong`);
     }
 
     if (message.content.startsWith('--verse')) {
