@@ -6,8 +6,6 @@ const roles = require('./lib/roles');
 const bot = new Discord.Client({disableEveryone: true});
 bible.setClient(bot);
 
-const {servers} = config;
-
 bot.on('ready', async () => {
     console.log(`Logged in as ${bot.user.tag}!`);
 
