@@ -1,5 +1,6 @@
 const bible = require('./lib/bible');
 const config = require('config');
+const colors = require('./lib/colors');
 const Discord = require('discord.js');
 const roles = require('./lib/roles');
 const bot = new Discord.Client({disableEveryone: true});
@@ -44,56 +45,14 @@ bot.on('message', async (message) => {
 bot.on('messageReactionAdd', (reaction, user) => {
     console.log('Reaction Added');
     if (reaction.message.id === roles.color) {
-        switch (reaction._emoji.name) {
-            case '🔶':
-                return roles.set(user.id, 'Orange');
-            case '🔴':
-                return roles.set(user.id, 'Red');
-            case '⚫':
-                return roles.set(user.id, 'Black');
-            case '⚪':
-                return roles.set(user.id, 'White');
-            case '🔵':
-                return roles.set(user.id, 'Blue');
-            case '💛':
-                return roles.set(user.id, 'Yellow');
-            case '💚':
-                return roles.set(user.id, 'Green');
-            case '💜':
-                return roles.set(user.id, 'Purple');
-            case '💗':
-                return roles.set(user.id, 'Pink');
-            default:
-                return reaction.remove(user.id);
-        }
+        colors.set(reaction, user.id)
     }
 });
 
 bot.on('messageReactionRemove', (reaction, user) => {
     console.log('Reaction Removed');
     if (reaction.message.id === roles.color) {
-        switch (reaction._emoji.name) {
-            case '🔶':
-                return roles.remove(user.id, 'Orange');
-            case '🔴':
-                return roles.remove(user.id, 'Red');
-            case '⚫':
-                return roles.remove(user.id, 'Black');
-            case '⚪':
-                return roles.remove(user.id, 'White');
-            case '🔵':
-                return roles.remove(user.id, 'Blue');
-            case '💛':
-                return roles.remove(user.id, 'Yellow');
-            case '💚':
-                return roles.remove(user.id, 'Green');
-            case '💜':
-                return roles.remove(user.id, 'Purple');
-            case '💗':
-                return roles.remove(user.id, 'Pink');
-            default:
-                return;
-        }
+        colors.remove(reaction, user.id);
     }
 });
 
