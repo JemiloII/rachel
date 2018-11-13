@@ -41,14 +41,12 @@ bot.on('message', async (message) => {
 });
 
 bot.on('messageReactionAdd', (reaction, user) => {
-    console.log('Reaction Added');
     if (reaction.message.id === roles.color) {
         colors.set(reaction, user.id)
     }
 });
 
 bot.on('messageReactionRemove', (reaction, user) => {
-    console.log('Reaction Removed');
     if (reaction.message.id === roles.color) {
         colors.remove(reaction, user.id);
     }
