@@ -1,6 +1,8 @@
 {
-  "token": "your-discord-token-here",
+  "discord": {
+    "token": "your-discord-token"
+  },
   "bible": {
-    "key": "your-scripture.api.bible-key"
+    "token": "your-api.esv.org-token"
   }
 }
