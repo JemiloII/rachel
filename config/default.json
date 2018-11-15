@@ -1,4 +1,7 @@
 {
+  "bible": {
+    "baseUrl": "https://api.esv.org"
+  },
   "servers": {
     "aoh": "392422842454769664"
   },
