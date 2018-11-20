@@ -12,6 +12,8 @@
   "dependencies": {
     "config": "2.0.1",
     "discord.js": "11.4.2",
+    "ffmpeg-binaries": "^4.0.0",
+    "opusscript": "0.0.6",
     "request": "2.88.0",
     "request-promise": "4.2.2"
   }

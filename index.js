@@ -31,15 +31,23 @@ bot.on('message', async (message) => {
     console.log(message.channel.name);
     console.log(`${message.author.username}: ${message.content}`);
 
-    if (message.content === 'ping') {
+    if (message.content.toLowerCase() === 'ping') {
         message.reply('pong');
         console.log(`${bot.user.username}: pong`);
     }
 
-    if (message.content.startsWith('--verse')) {
+    if (message.content.startsWith('bible --text') ||
+        message.content.startsWith('--verse')) {
         bible.sendVerse(message);
     }
 
+    if (message.content.startsWith('bible --audio')) {
+        bible.playAudio(message);
+    }
+
+    if (message.content.startsWith('game --add')) {
+        games.add(message);
+    }
 });
 
 bot.on('messageReactionAdd', (reaction, user) => {
