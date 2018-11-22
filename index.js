@@ -2,6 +2,7 @@ const bible = require('./lib/bible');
 const config = require('config');
 const colors = require('./lib/roles/colors');
 const Discord = require('discord.js');
+const games = require('./lib/roles/games');
 const genders = require('./lib/roles/genders');
 const roles = require('./lib/roles');
 const bot = new Discord.Client({disableEveryone: true});
@@ -24,30 +25,31 @@ bot.on('ready', async () => {
 });
 
 bot.on('message', async (message) => {
-    if (message.author.bot) {
+    const {author, channel, content} = message;
+    if (author.bot) {
         return;
     }
 
-    console.log(message.channel.name);
-    console.log(`${message.author.username}: ${message.content}`);
+    console.log(channel.name);
+    console.log(`${author.username}: ${content}`);
 
-    if (message.content.toLowerCase() === 'ping') {
-        message.reply('pong');
-        console.log(`${bot.user.username}: pong`);
+    switch(true) {
+        case content.toLowerCase() === 'ping':
+            console.log(`${bot.user.username}: pong`);
+            return message.reply('pong');
+        case content.startsWith('--verse'):
+        case content.startsWith('bible --text'):
+            return bible.sendVerse(message);
+        case content.startsWith('bible --audio'):
+            return bible.playAudio(message);
+        case content.startsWith('game --add '):
+            return games.add(message);
+        case content.startsWith('game --set '):
+            return games.remove(message);
+        default:
+            return void 0;
     }
 
-    if (message.content.startsWith('bible --text') ||
-        message.content.startsWith('--verse')) {
-        bible.sendVerse(message);
-    }
-
-    if (message.content.startsWith('bible --audio')) {
-        bible.playAudio(message);
-    }
-
-    if (message.content.startsWith('game --add')) {
-        games.add(message);
-    }
 });
 
 bot.on('messageReactionAdd', (reaction, user) => {
