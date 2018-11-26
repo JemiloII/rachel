@@ -49,7 +49,6 @@ bot.on('message', async (message) => {
         default:
             return void 0;
     }
-
 });
 
 bot.on('messageReactionAdd', (reaction, user) => {
@@ -74,12 +73,10 @@ bot.on('messageReactionRemove', (reaction, user) => {
 });
 
 bot.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.find(ch => ch.name === 'registration-room');
-    if (channel) {
-        const role = member.guild.roles.find('name', 'Initiate Friends');
-        await member.addRole(role);
-        channel.reply(`Welcome to the server, ${member}`);
-    }
+    const GeneralChannel = member.guild.channels.find(ch => ch.name === 'general');
+    const role = member.guild.roles.find('name', 'Initiate Friends');
+    await member.addRole(role);
+    GeneralChannel.send(`@Welcome @${member}. Welcome to Angels of Heaven! Set your #roles here~ Enjoy your time here!`);
 });
 
 bot.login(config.get('discord.token'))
