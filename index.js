@@ -79,5 +79,9 @@ bot.on('guildMemberAdd', async member => {
     GeneralChannel.send(`@Welcome @${member}. Welcome to Angels of Heaven! Set your #roles here~ Enjoy your time here!`);
 });
 
+bot.on('error', console.error);
+
 bot.login(config.get('discord.token'))
     .catch(error => console.error('Failed to login!', error));
+
+process.on('uncaughtException', error => console.log('Caught exception:', error));
