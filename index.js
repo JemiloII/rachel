@@ -79,5 +79,9 @@ bot.on('guildMemberAdd', async member => {
     GeneralChannel.send(`${member} <@&516746746764722177> to Angels of Heaven!\nMake sure to set your <#510082804655063060> and enjoy your time here!`);
 });
 
+bot.on('error', console.error);
+
 bot.login(config.get('discord.token'))
     .catch(error => console.error('Failed to login!', error));
+
+process.on('uncaughtException', error => console.log('Caught exception:', error));
