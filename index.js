@@ -44,6 +44,8 @@ bot.on('message', async (message) => {
             return bible.playAudio(message);
         case content.startsWith('game --add '):
             return games.add(message);
+        case content.startsWith('game --help '):
+            return games.help(message);
         case content.startsWith('game --remove '):
             return games.remove(message);
         default:
