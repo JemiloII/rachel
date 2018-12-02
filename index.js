@@ -2,8 +2,10 @@ const bible = require('./lib/bible');
 const config = require('config');
 const colors = require('./lib/roles/colors');
 const Discord = require('discord.js');
+const ages = require('./lib/roles/ages');
 const games = require('./lib/roles/games');
 const genders = require('./lib/roles/genders');
+const orientations = require('./lib/roles/orientations');
 const roles = require('./lib/roles');
 const bot = new Discord.Client({disableEveryone: true});
 bible.setClient(bot);
@@ -15,8 +17,10 @@ bot.on('ready', async () => {
         let link = await bot.generateInvite(['ADMINISTRATOR']);
         console.log('link:', link);
         const channel = bot.channels.get('510082804655063060');
+        await channel.fetchMessage(roles.age);
         await channel.fetchMessage(roles.color);
         await channel.fetchMessage(roles.gender);
+        await channel.fetchMessage(roles.orientation);
 
         roles.init(bot);
     } catch (e) {
@@ -34,6 +38,9 @@ bot.on('message', async (message) => {
     console.log(`${author.username}: ${content}`);
 
     switch(true) {
+        case content.toLowerCase() === 'rachel bot is a real person':
+            console.log(`${bot.user.username}: 😉`);
+            return setTimeout(() => message.reply('😉'), 3000);
         case content.toLowerCase() === 'ping':
             console.log(`${bot.user.username}: pong`);
             return message.reply('pong');
@@ -44,7 +51,7 @@ bot.on('message', async (message) => {
             return bible.playAudio(message);
         case content.startsWith('game --add '):
             return games.add(message);
-        case content.startsWith('game --help '):
+        case content.startsWith('game --help'):
             return games.help(message);
         case content.startsWith('game --remove '):
             return games.remove(message);
@@ -54,23 +61,34 @@ bot.on('message', async (message) => {
 });
 
 bot.on('messageReactionAdd', (reaction, user) => {
-    console.log('emoji:', reaction._emoji.name);
-    if (reaction.message.id === roles.color) {
-        colors.set(reaction, user.id)
-    }
-
-    if (reaction.message.id === roles.gender) {
-        genders.set(reaction, user.id);
+    console.log('add emoji:', reaction._emoji.name);
+    switch(reaction.message.id) {
+        case roles.age:
+            return ages.set(reaction, user.id);
+        case roles.color:
+            return colors.set(reaction, user.id);
+        case roles.gender:
+            return genders.set(reaction, user.id);
+        case roles.orientation:
+            return orientations.set(reaction, user.id);
+        default:
+            return void 0;
     }
 });
 
 bot.on('messageReactionRemove', (reaction, user) => {
-    if (reaction.message.id === roles.color) {
-        colors.remove(reaction, user.id);
-    }
-
-    if (reaction.message.id === roles.gender) {
-        genders.remove(reaction, user.id);
+    console.log('remove emoji:', reaction._emoji.name);
+    switch(reaction.message.id) {
+        case roles.age:
+            return ages.remove(reaction, user.id);
+        case roles.color:
+            return colors.remove(reaction, user.id);
+        case roles.gender:
+            return genders.remove(reaction, user.id);
+        case roles.orientation:
+            return orientations.remove(reaction, user.id);
+        default:
+            return void 0;
     }
 });
 
