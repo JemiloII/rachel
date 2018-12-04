@@ -28,7 +28,7 @@ bot.on('ready', async () => {
     }
 });
 
-bot.on('message', async (message) => {
+const handleMessage = async (message) => {
     const {author, channel, content} = message;
     if (author.bot) {
         return;
@@ -61,45 +61,41 @@ bot.on('message', async (message) => {
         default:
             return void 0;
     }
-});
+};
 
-bot.on('messageReactionAdd', (reaction, user) => {
-    console.log('add emoji:', reaction._emoji.name);
+bot.on('message', handleMessage);
+bot.on('messageUpdate', handleMessage);
+
+const reactions = action => (reaction, user) => {
+    console.log(action, 'emoji:', reaction._emoji.name);
     switch(reaction.message.id) {
         case roles.age:
-            return ages.set(reaction, user.id);
+            return ages[action](reaction, user.id);
         case roles.color:
-            return colors.set(reaction, user.id);
+            return colors[action](reaction, user.id);
         case roles.gender:
-            return genders.set(reaction, user.id);
+            return genders[action](reaction, user.id);
         case roles.orientation:
-            return orientations.set(reaction, user.id);
+            return orientations[action](reaction, user.id);
         default:
             return void 0;
     }
-});
+};
 
-bot.on('messageReactionRemove', (reaction, user) => {
-    console.log('remove emoji:', reaction._emoji.name);
-    switch(reaction.message.id) {
-        case roles.age:
-            return ages.remove(reaction, user.id);
-        case roles.color:
-            return colors.remove(reaction, user.id);
-        case roles.gender:
-            return genders.remove(reaction, user.id);
-        case roles.orientation:
-            return orientations.remove(reaction, user.id);
-        default:
-            return void 0;
-    }
-});
+bot.on('messageReactionAdd', reactions('set'));
+bot.on('messageReactionRemove', reactions('remove'));
 
 bot.on('guildMemberAdd', async member => {
     const GeneralChannel = member.guild.channels.find(ch => ch.name === 'general');
-    const role = member.guild.roles.find(info => info.name === 'Initiates');
-    await member.addRole(role);
+    const Initiates = member.guild.roles.find(info => info.name === 'Initiate Friends');
+    const InitiateFriends = member.guild.roles.find(info => info.name === 'Initiates');
+    await member.addRoles([Initiates, InitiateFriends]);
     GeneralChannel.send(`${member} <@&516746746764722177> to Angels of Heaven!\nMake sure to set your <#510082804655063060> and enjoy your time here!`);
+});
+
+bot.on('guildMemberRemove', async member => {
+    const RegistrationRoom = member.guild.channels.find(ch => ch.name === 'registration-room');
+    RegistrationRoom.send(`${member} has left.`);
 });
 
 bot.on('error', console.error);
