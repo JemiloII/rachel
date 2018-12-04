@@ -1,12 +1,12 @@
 exports.up = knex =>
     knex.schema
-        .createTable('servers', table => {
+        .createTable('guilds', table => {
             table.string('id').primary();
             table.string('name');
         })
         .createTable('channels', table => {
             table.string('id').primary();
-            table.string('server_id');
+            table.string('guild_id');
             table.string('name');
             table.string('type');
         })
@@ -32,7 +32,7 @@ exports.up = knex =>
 
 exports.down = knex =>
     knex.schema
-        .dropTable('servers')
+        .dropTable('guilds')
         .dropTable('channels')
         .dropTable('role_groups')
         .dropTable('messages')

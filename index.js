@@ -49,10 +49,13 @@ bot.on('message', async (message) => {
             return bible.sendVerse(message);
         case content.startsWith('bible --audio'):
             return bible.playAudio(message);
+        case content.startsWith('game add '):
         case content.startsWith('game --add '):
             return games.add(message);
+        case content.startsWith('game help'):
         case content.startsWith('game --help'):
             return games.help(message);
+        case content.startsWith('game remove '):
         case content.startsWith('game --remove '):
             return games.remove(message);
         default:
