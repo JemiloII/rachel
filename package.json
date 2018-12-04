@@ -10,11 +10,15 @@
   "author": "Brian Jemilo II <jemiloii@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "bookshelf": "^0.13.3",
+    "bookshelf-camelcase": "^2.0.1",
     "config": "2.0.1",
     "discord.js": "11.4.2",
     "ffmpeg-binaries": "^4.0.0",
+    "knex": "^0.15.2",
     "opusscript": "0.0.6",
     "request": "2.88.0",
-    "request-promise": "4.2.2"
+    "request-promise": "4.2.2",
+    "sqlite3": "^4.0.4"
   }
 }

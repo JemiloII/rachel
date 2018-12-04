@@ -2,6 +2,20 @@
   "bible": {
     "baseUrl": "https://api.esv.org"
   },
+  "database": {
+    "debug": true,
+    "client": "sqlite3",
+    "connection": {
+      "filename": "./bot.sqlite"
+    },
+    "migrations": {
+      "directory": "./knex/migrations"
+    },
+    "seeds": {
+      "directory": "./knex/seeds"
+    },
+    "useNullAsDefault": true
+  },
   "servers": {
     "aoh": "392422842454769664"
   },
