@@ -94,7 +94,7 @@ bot.on('messageReactionRemove', (reaction, user) => {
 
 bot.on('guildMemberAdd', async member => {
     const GeneralChannel = member.guild.channels.find(ch => ch.name === 'general');
-    const role = member.guild.roles.find(info => info.name === 'Initiate Friends');
+    const role = member.guild.roles.find(info => info.name === 'Initiates');
     await member.addRole(role);
     GeneralChannel.send(`${member} <@&516746746764722177> to Angels of Heaven!\nMake sure to set your <#510082804655063060> and enjoy your time here!`);
 });
