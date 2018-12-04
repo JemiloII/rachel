@@ -22,7 +22,6 @@ exports.up = knex =>
             table.string('description');
             table.boolean('select_multiple');
         })
-
         .createTable('roles', table => {
             table.integer('id').primary();
             table.string('role_group_id');
