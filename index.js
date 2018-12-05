@@ -28,7 +28,8 @@ bot.on('ready', async () => {
     }
 });
 
-const handleMessage = async (message) => {
+const handleMessage = async (message, messageUpdate = false) => {
+    message = messageUpdate || message;
     const {author, channel, content} = message;
     if (author.bot) {
         return;
@@ -85,17 +86,34 @@ const reactions = action => (reaction, user) => {
 bot.on('messageReactionAdd', reactions('set'));
 bot.on('messageReactionRemove', reactions('remove'));
 
-bot.on('guildMemberAdd', async member => {
+const sendEmbem = (member) => {
     const GeneralChannel = member.guild.channels.find(ch => ch.name === 'general');
+    const embed = {
+        "title": `Welcome ${message.member.displayName} to Angels of Heaven!`,
+        "description": `<@&516746746764722177> ${member}! Make sure to set your <#510082804655063060> and introduce yourself in <#517562086310674435> channel! You can use <#511301471690555407> to assign game roles.`,
+        "color": 5046016,
+        "thumbnail": {
+            "url": "https://i.gifer.com/3iCH.gif"
+        },
+        "image": {
+            "url": "https://orig00.deviantart.net/31ee/f/2016/202/3/a/kirino_gif_494x694_by_artemsan15-daaup2t.gif"
+        }
+    };
+    GeneralChannel.send({embed});
+};
+
+bot.on('guildMemberAdd', async member => {
+    const RegistrationRoom = member.guild.channels.find(ch => ch.name === 'registration-room');
     const Initiates = member.guild.roles.find(info => info.name === 'Initiate Friends');
     const InitiateFriends = member.guild.roles.find(info => info.name === 'Initiates');
     await member.addRoles([Initiates, InitiateFriends]);
-    GeneralChannel.send(`${member} <@&516746746764722177> to Angels of Heaven!\nMake sure to set your <#510082804655063060> and enjoy your time here!`);
+    RegistrationRoom.send(`${message.member.displayName} has joined.`);
+    sendEmbem(member);
 });
 
 bot.on('guildMemberRemove', async member => {
     const RegistrationRoom = member.guild.channels.find(ch => ch.name === 'registration-room');
-    RegistrationRoom.send(`${member} has left.`);
+    RegistrationRoom.send(`${message.member.displayName} has left.`);
 });
 
 bot.on('error', console.error);
