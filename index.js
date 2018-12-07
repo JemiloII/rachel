@@ -116,7 +116,7 @@ bot.on('guildMemberAdd', async member => {
 });
 
 bot.on('guildMemberRemove', async member => {
-    const RegistrationRoom = member.guild.channels.find(ch => ch.name === 'registration-room');
+    const RegistrationRoom = member.guild.channels.find(ch => ch.name === 'joins-leaves');
     RegistrationRoom.send(`${member.displayName} has left.`);
 });
 
