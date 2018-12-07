@@ -103,7 +103,7 @@ const sendEmbem = (member) => {
 };
 
 bot.on('guildMemberAdd', async member => {
-    const RegistrationRoom = member.guild.channels.find(ch => ch.name === 'registration-room');
+    const RegistrationRoom = member.guild.channels.find(ch => ch.name === 'joins-leaves');
     const Initiates = member.guild.roles.find(info => info.name === 'Initiate Friends');
     const InitiateFriends = member.guild.roles.find(info => info.name === 'Initiates');
     await member.addRoles([Initiates, InitiateFriends]);
