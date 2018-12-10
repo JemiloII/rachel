@@ -16,6 +16,10 @@
     },
     "useNullAsDefault": true
   },
+  "leagueOfLegends": {
+    "cdn":"https://ddragon.leagueoflegends.com/cdn",
+    "lang": "en_US"
+  },
   "servers": {
     "aoh": "392422842454769664"
   },

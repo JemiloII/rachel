@@ -7,22 +7,25 @@ const games = require('./lib/roles/games');
 const genders = require('./lib/roles/genders');
 const orientations = require('./lib/roles/orientations');
 const roles = require('./lib/roles');
-const bot = new Discord.Client({disableEveryone: true});
-bible.setClient(bot);
+const LeagueOfLegends = require('./lib/league-of-legends');
 
-bot.on('ready', async () => {
-    console.log(`Logged in as ${bot.user.tag}!`);
+const client = new Discord.Client({disableEveryone: true});
+bible.setClient(client);
+
+client.on('ready', async () => {
+    console.log(`Logged in as ${client.user.tag}!`);
 
     try {
-        let link = await bot.generateInvite(['ADMINISTRATOR']);
+        let link = await client.generateInvite(['ADMINISTRATOR']);
         console.log('link:', link);
-        const channel = bot.channels.get('510082804655063060');
+        const channel = client.channels.get('510082804655063060');
         await channel.fetchMessage(roles.age);
         await channel.fetchMessage(roles.color);
         await channel.fetchMessage(roles.gender);
         await channel.fetchMessage(roles.orientation);
 
-        roles.init(bot);
+        new LeagueOfLegends(client);
+        roles.init(client);
     } catch (e) {
         console.error(e);
     }
@@ -47,7 +50,7 @@ const sendEmbed = (member) => {
 const handleMessage = async (message, messageUpdate = false) => {
     message = messageUpdate || message;
     const {author, channel, content} = message;
-    if (author.bot) {
+    if (author.client) {
         return;
     }
 
@@ -58,10 +61,10 @@ const handleMessage = async (message, messageUpdate = false) => {
         case content.toLowerCase() === 'test':
             return sendEmbed(message.member);
         case content.toLowerCase() === 'rachel bot is a real person':
-            console.log(`${bot.user.username}: 😉`);
+            console.log(`${client.user.username}: 😉`);
             return setTimeout(() => message.reply('😉'), 3000);
         case content.toLowerCase() === 'ping':
-            console.log(`${bot.user.username}: pong`);
+            console.log(`${client.user.username}: pong`);
             return message.reply('pong');
         case content.startsWith('--verse'):
         case content.startsWith('bible --text'):
@@ -82,8 +85,8 @@ const handleMessage = async (message, messageUpdate = false) => {
     }
 };
 
-bot.on('message', handleMessage);
-bot.on('messageUpdate', handleMessage);
+// client.on('message', handleMessage);
+// client.on('messageUpdate', handleMessage);
 
 const reactions = action => (reaction, user) => {
     console.log(action, 'emoji:', reaction._emoji.name);
@@ -101,28 +104,16 @@ const reactions = action => (reaction, user) => {
     }
 };
 
-bot.on('messageReactionAdd', reactions('set'));
-bot.on('messageReactionRemove', reactions('remove'));
+// client.on('messageReactionAdd', reactions('set'));
+// client.on('messageReactionRemove', reactions('remove'));
 
 
 
-bot.on('guildMemberAdd', async member => {
-    const RegistrationRoom = member.guild.channels.find(ch => ch.name === 'joins-leaves');
-    const Initiates = member.guild.roles.find(info => info.name === 'Initiate Friends');
-    const InitiateFriends = member.guild.roles.find(info => info.name === 'Initiates');
-    await member.addRoles([Initiates, InitiateFriends]);
-    RegistrationRoom.send(`${member.displayName} has joined.`);
-    sendEmbed(member);
-});
 
-bot.on('guildMemberRemove', async member => {
-    const RegistrationRoom = member.guild.channels.find(ch => ch.name === 'joins-leaves');
-    RegistrationRoom.send(`${member.displayName} has left.`);
-});
 
-bot.on('error', console.error);
+// client.on('error', console.error);
 
-bot.login(config.get('discord.token'))
+client.login(config.get('discord.token'))
     .catch(error => console.error('Failed to login!', error));
 
 process.on('uncaughtException', error => console.log('Caught exception:', error));
