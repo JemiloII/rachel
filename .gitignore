@@ -1,4 +1,6 @@
 .idea
 *.iml
 config/local*.json
+audio/
+bot.sqlite
 node_modules
