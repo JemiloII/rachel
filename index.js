@@ -31,22 +31,6 @@ client.on('ready', async () => {
     }
 });
 
-const sendEmbed = (member) => {
-    const GeneralChannel = member.guild.channels.find(ch => ch.name === 'general');
-    const embed = {
-        "title": `Welcome ${member.displayName} to Angels of Heaven!`,
-        "description": `<@&516746746764722177> ${member}! Make sure to set your <#510082804655063060> and introduce yourself in <#517562086310674435> channel! You can use <#511301471690555407> to assign game roles.`,
-        "color": 5046016,
-        "thumbnail": {
-            "url": "https://i.gifer.com/3iCH.gif"
-        },
-        "image": {
-            "url": "https://orig00.deviantart.net/31ee/f/2016/202/3/a/kirino_gif_494x694_by_artemsan15-daaup2t.gif"
-        }
-    };
-    GeneralChannel.send({embed});
-};
-
 const handleMessage = async (message, messageUpdate = false) => {
     message = messageUpdate || message;
     const {author, channel, content} = message;
@@ -58,11 +42,13 @@ const handleMessage = async (message, messageUpdate = false) => {
     console.log(`${author.username}: ${content}`);
 
     switch(true) {
-        case content.toLowerCase() === 'test':
-            return sendEmbed(message.member);
         case content.toLowerCase() === 'rachel bot is a real person':
             console.log(`${client.user.username}: 😉`);
-            return setTimeout(() => message.reply('😉'), 3000);
+            message.startTyping(1);
+            return setTimeout(() => {
+                message.stopTyping();
+                message.reply('You can think that~ 😉');
+            }, 3000);
         case content.toLowerCase() === 'ping':
             console.log(`${client.user.username}: pong`);
             return message.reply('pong');
@@ -107,11 +93,7 @@ const reactions = action => (reaction, user) => {
 // client.on('messageReactionAdd', reactions('set'));
 // client.on('messageReactionRemove', reactions('remove'));
 
-
-
-
-
-// client.on('error', console.error);
+client.on('error', console.error);
 
 client.login(config.get('discord.token'))
     .catch(error => console.error('Failed to login!', error));

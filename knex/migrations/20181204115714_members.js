@@ -5,6 +5,7 @@ exports.up = knex =>
             table.string('display_name');
             table.string('username');
             table.integer('delimiter');
+            table.string('message_id');
         })
         .createTable('guild_member_associations', table => {
             table.string('guild_id');
