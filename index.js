@@ -52,17 +52,28 @@ const handleMessage = async (message, messageUpdate = false) => {
         case content.toLowerCase() === 'ping':
             console.log(`${client.user.username}: pong`);
             return message.reply('pong');
+        case content.startsWith('bible h '):
+        case content.startsWith('bible help '):
+        case content.startsWith('bible --help '):
+            return bible.help();
         case content.startsWith('--verse'):
-        case content.startsWith('bible --text'):
+        case content.startsWith('bible t '):
+        case content.startsWith('bible text '):
+        case content.startsWith('bible --text '):
             return bible.sendVerse(message);
-        case content.startsWith('bible --audio'):
+        case content.startsWith('bible a '):
+        case content.startsWith('bible audio '):
+        case content.startsWith('bible --audio '):
             return bible.playAudio(message);
+        case content.startsWith('game a '):
         case content.startsWith('game add '):
         case content.startsWith('game --add '):
             return games.add(message);
+        case content.startsWith('game h'):
         case content.startsWith('game help'):
         case content.startsWith('game --help'):
             return games.help(message);
+        case content.startsWith('game r '):
         case content.startsWith('game remove '):
         case content.startsWith('game --remove '):
             return games.remove(message);
@@ -71,8 +82,8 @@ const handleMessage = async (message, messageUpdate = false) => {
     }
 };
 
-// client.on('message', handleMessage);
-// client.on('messageUpdate', handleMessage);
+client.on('message', handleMessage);
+client.on('messageUpdate', handleMessage);
 
 const reactions = action => (reaction, user) => {
     console.log(action, 'emoji:', reaction._emoji.name);
@@ -90,8 +101,8 @@ const reactions = action => (reaction, user) => {
     }
 };
 
-// client.on('messageReactionAdd', reactions('set'));
-// client.on('messageReactionRemove', reactions('remove'));
+client.on('messageReactionAdd', reactions('set'));
+client.on('messageReactionRemove', reactions('remove'));
 
 client.on('error', console.error);
 
