@@ -58,8 +58,12 @@ const handleMessage = async (message, messageUpdate = false) => {
         case content.toLowerCase() === 'test':
             return sendEmbed(message.member);
         case content.toLowerCase() === 'rachel bot is a real person':
-            console.log(`${bot.user.username}: 😉`);
-            return setTimeout(() => message.reply('😉'), 3000);
+            console.log(`${client.user.username}: 😉`);
+            message.startTyping(1);
+            return setTimeout(() => {
+                message.stopTyping();
+                message.reply('You can think that~ 😉');
+            }, 3000);
         case content.toLowerCase() === 'ping':
             console.log(`${bot.user.username}: pong`);
             return message.reply('pong');
@@ -86,7 +90,7 @@ bot.on('message', handleMessage);
 bot.on('messageUpdate', handleMessage);
 
 const reactions = action => (reaction, user) => {
-    console.log(action, 'emoji:', reaction._emoji.name);
+    console.log(user.id, user.displayName, action, 'emoji:', reaction._emoji.name);
     switch(reaction.message.id) {
         case roles.age:
             return ages[action](reaction, user.id);
@@ -103,8 +107,6 @@ const reactions = action => (reaction, user) => {
 
 bot.on('messageReactionAdd', reactions('set'));
 bot.on('messageReactionRemove', reactions('remove'));
-
-
 
 bot.on('guildMemberAdd', async member => {
     const RegistrationRoom = member.guild.channels.find(ch => ch.name === 'joins-leaves');
