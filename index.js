@@ -2,22 +2,24 @@ const bible = require('./lib/bible');
 const config = require('config');
 const colors = require('./lib/roles/colors');
 const Discord = require('discord.js');
+const logger = require('./lib/common/logger');
 const ages = require('./lib/roles/ages');
 const games = require('./lib/roles/games');
 const genders = require('./lib/roles/genders');
 const orientations = require('./lib/roles/orientations');
 const roles = require('./lib/roles');
+const prompt = require('./lib/prompt');
 const LeagueOfLegends = require('./lib/league-of-legends');
 
 const client = new Discord.Client({disableEveryone: true});
 bible.setClient(client);
 
 client.on('ready', async () => {
-    console.log(`Logged in as ${client.user.tag}!`);
+    logger.info(`Logged in as ${client.user.tag}!`);
 
     try {
         let link = await client.generateInvite(['ADMINISTRATOR']);
-        console.log('link:', link);
+        logger.debug('link:', link);
         const channel = client.channels.get('510082804655063060');
         await channel.fetchMessage(roles.age);
         await channel.fetchMessage(roles.color);
@@ -26,31 +28,32 @@ client.on('ready', async () => {
 
         new LeagueOfLegends(client);
         roles.init(client);
+        prompt.init(client);
     } catch (e) {
-        console.error(e);
+        logger.error(e);
     }
 });
 
 const handleMessage = async (message, messageUpdate = false) => {
     message = messageUpdate || message;
     const {author, channel, content} = message;
-    if (author.client) {
-        return;
-    }
+    // if (author.client) {
+    //     return;
+    // }
 
-    console.log(channel.name);
-    console.log(`${author.username}: ${content}`);
+    logger.debug(channel.name);
+    logger.debug(`${author.username}: ${content}`);
 
     switch(true) {
         case content.toLowerCase() === 'rachel bot is a real person':
-            console.log(`${client.user.username}: 😉`);
+            logger.verbose(`${client.user.username}: 😉`);
             message.startTyping(1);
             return setTimeout(() => {
                 message.stopTyping();
                 message.reply('You can think that~ 😉');
             }, 3000);
         case content.toLowerCase() === 'ping':
-            console.log(`${client.user.username}: pong`);
+            logger.verbose(`${client.user.username}: pong`);
             return message.reply('pong');
         case content.startsWith('bible h '):
         case content.startsWith('bible help '):
@@ -104,9 +107,9 @@ const reactions = action => (reaction, user) => {
 client.on('messageReactionAdd', reactions('set'));
 client.on('messageReactionRemove', reactions('remove'));
 
-client.on('error', console.error);
+client.on('error', logger.error);
 
 client.login(config.get('discord.token'))
-    .catch(error => console.error('Failed to login!', error));
+    .catch(error => logger.error('Failed to login!', error));
 
-process.on('uncaughtException', error => console.log('Caught exception:', error));
+process.on('uncaughtException', error => logger.error('Caught exception:', error));

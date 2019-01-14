@@ -1,8 +1,11 @@
 {
+  "bible": {
+    "token": "your-api.esv.org-token",
+  },
   "discord": {
     "token": "your-discord-token"
   },
-  "bible": {
-    "token": "your-api.esv.org-token"
+  "riot": {
+    "token": "your-riotapi-token"
   }
 }

@@ -20,6 +20,16 @@
     "cdn":"https://ddragon.leagueoflegends.com/cdn",
     "lang": "en_US"
   },
+  "logger": {
+    "console": {
+      "level": "debug"
+    },
+    "file": {
+      "path": "./logs",
+      "level": "debug",
+      "name": "rachel.log"
+    }
+  },
   "servers": {
     "aoh": "392422842454769664"
   },
