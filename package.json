@@ -4,25 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
+    "start": "nodemon .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brian Jemilo II <jemiloii@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^3.5.3",
-    "bookshelf": "^0.13.3",
-    "bookshelf-camelcase": "^2.0.1",
+    "bluebird": "3.5.3",
+    "bookshelf": "0.13.3",
+    "bookshelf-camelcase": "2.0.1",
     "config": "2.0.1",
     "discord.js": "11.4.2",
-    "ffmpeg-binaries": "^4.0.0",
-    "knex": "^0.15.2",
+    "ffmpeg-binaries": "4.0.0",
+    "knex": "0.15.2",
     "opusscript": "0.0.6",
-    "prompt": "^1.0.0",
     "request": "2.88.0",
-    "request-promise": "^4.2.2",
-    "sqlite3": "^4.0.4",
-    "winston": "^3.1.0",
-    "winston-daily-rotate-file": "^3.6.0"
+    "request-promise": "4.2.2",
+    "sqlite3": "4.0.4",
+    "winston": "2.4.2",
+    "winston-daily-rotate-file": "3.1.3"
   }
 }
