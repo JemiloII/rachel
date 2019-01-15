@@ -7,6 +7,7 @@ const ages = require('./lib/roles/ages');
 const games = require('./lib/roles/games');
 const genders = require('./lib/roles/genders');
 const orientations = require('./lib/roles/orientations');
+const registration = require('./lib/registration');
 const roles = require('./lib/roles');
 const prompt = require('./lib/prompt');
 const LeagueOfLegends = require('./lib/league-of-legends');
@@ -27,6 +28,7 @@ client.on('ready', async () => {
         await channel.fetchMessage(roles.orientation);
 
         new LeagueOfLegends(client);
+        registration.init(client);
         roles.init(client);
         prompt.init(client);
     } catch (e) {
