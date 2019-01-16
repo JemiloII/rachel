@@ -1,12 +1,8 @@
 const bible = require('./lib/bible');
 const config = require('config');
-const colors = require('./lib/roles/colors');
 const Discord = require('discord.js');
-const logger = require('./lib/common/logger');
-const ages = require('./lib/roles/ages');
 const games = require('./lib/roles/games');
-const genders = require('./lib/roles/genders');
-const orientations = require('./lib/roles/orientations');
+const logger = require('./lib/common/logger');
 const registration = require('./lib/registration');
 const roles = require('./lib/roles');
 const prompt = require('./lib/prompt');
@@ -21,16 +17,11 @@ client.on('ready', async () => {
     try {
         let link = await client.generateInvite(['ADMINISTRATOR']);
         logger.debug('link:', link);
-        const channel = client.channels.get('510082804655063060');
-        await channel.fetchMessage(roles.age);
-        await channel.fetchMessage(roles.color);
-        await channel.fetchMessage(roles.gender);
-        await channel.fetchMessage(roles.orientation);
 
-        new LeagueOfLegends(client);
+        LeagueOfLegends.init(client);
+        prompt.init(client);
         registration.init(client);
         roles.init(client);
-        prompt.init(client);
     } catch (e) {
         logger.error(e);
     }
@@ -89,25 +80,6 @@ const handleMessage = async (message, messageUpdate = false) => {
 
 client.on('message', handleMessage);
 client.on('messageUpdate', handleMessage);
-
-const reactions = action => (reaction, user) => {
-    console.log(action, 'emoji:', reaction._emoji.name);
-    switch(reaction.message.id) {
-        case roles.age:
-            return ages[action](reaction, user.id);
-        case roles.color:
-            return colors[action](reaction, user.id);
-        case roles.gender:
-            return genders[action](reaction, user.id);
-        case roles.orientation:
-            return orientations[action](reaction, user.id);
-        default:
-            return void 0;
-    }
-};
-
-client.on('messageReactionAdd', reactions('set'));
-client.on('messageReactionRemove', reactions('remove'));
 
 client.on('error', logger.error);
 
