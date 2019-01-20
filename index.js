@@ -47,8 +47,6 @@ const handleMessage = async (message, messageUpdate = false) => {
     logger.debug(`${author.username}: ${content}`);
 
     switch(true) {
-        case content.toLowerCase() === 'test':
-            return sendEmbed(message.member);
         case content.toLowerCase() === 'i love rachel':
             return message.reply(':heart: :heart: :heart:');
         case content.toLowerCase() === 'rachel is a real person':
