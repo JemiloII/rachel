@@ -47,13 +47,21 @@ const handleMessage = async (message, messageUpdate = false) => {
     logger.debug(`${author.username}: ${content}`);
 
     switch(true) {
+        case content.toLowerCase() === 'test':
+            return sendEmbed(message.member);
+        case content.toLowerCase() === 'i love rachel':
+            return message.reply(':heart: :heart: :heart:');
+        case content.toLowerCase() === 'rachel is a real person':
+        case content.toLowerCase() === 'i think rachel is a real person':
+        case content.toLowerCase() === 'i think rachel bot is a real person':
         case content.toLowerCase() === 'rachel bot is a real person':
-            logger.verbose(`${client.user.username}: 😉`);
-            message.startTyping(1);
-            return setTimeout(() => {
-                message.stopTyping();
-                message.reply('You can think that~ 😉');
-            }, 3000);
+            logger.verbose(`${bot.user.username}: 😉`);
+            return message.reply('You can think that~ 😉');
+        case content.toLowerCase() === 'hi shibi':
+        case content.toLowerCase() === 'hi matt':
+        case content.toLowerCase() === 'hi kuri':
+        case content.toLowerCase() === 'hi jayxd':
+            return message.channel.send(content);
         case content.toLowerCase() === 'ping':
             logger.verbose(`${client.user.username}: pong`);
             return message.reply('pong');
