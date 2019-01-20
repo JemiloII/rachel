@@ -1,6 +1,6 @@
 To get started.
 
-1. Run `npm install`
+1. Run `npm install` and `npm i -g nodemon knex`
 
 2. Copy `template.json` as `local.json`
 
