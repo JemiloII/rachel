@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const games = require('./lib/roles/games');
 const logger = require('./lib/common/logger');
 const registration = require('./lib/registration');
-const roles = require('./lib/roles');
+const roles = require('./lib/roles/init');
 const prompt = require('./lib/prompt');
 const LeagueOfLegends = require('./lib/league-of-legends');
 
