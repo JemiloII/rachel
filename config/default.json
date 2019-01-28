@@ -16,6 +16,9 @@
     },
     "useNullAsDefault": true
   },
+  "enable": {
+    "registration": true
+  },
   "leagueOfLegends": {
     "cdn":"https://ddragon.leagueoflegends.com/cdn",
     "lang": "en_US"
