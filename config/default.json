@@ -17,7 +17,8 @@
     "useNullAsDefault": true
   },
   "enable": {
-    "registration": true
+    "registration": true,
+    "bumps": true
   },
   "leagueOfLegends": {
     "cdn":"https://ddragon.leagueoflegends.com/cdn",
@@ -37,7 +38,8 @@
     "aoh": "392422842454769664"
   },
   "channels": {
-    "react-roles": "510082804655063060"
+    "react-roles": "510082804655063060",
+    "bumps": "534795509852930059"
   },
   "roles": {
     "age": "518595830081650698",
@@ -45,5 +47,6 @@
     "gender": "512731782421020735",
     "orientation": "518323329271201797",
     "ping": "539496600406458368"
-  }
+  },
+  "secret": "rachel"
 }

@@ -1,4 +1,5 @@
 const bible = require('./lib/bible');
+const bumps = require('./lib/bumps');
 const config = require('config');
 const Discord = require('discord.js');
 const games = require('./lib/roles/games');
@@ -22,6 +23,7 @@ client.on('ready', async () => {
         prompt.init(client);
         registration.init(client);
         roles.init(client);
+        bumps.init(client);
     } catch (e) {
         logger.error(e);
     }
@@ -34,8 +36,7 @@ const handleMessage = async (message, messageUpdate = false) => {
     //     return;
     // }
 
-    logger.debug(channel.name);
-    logger.debug(`${author.username}: ${content}`);
+    logger.debug(`${channel.name}| ${author.username}: ${content}`);
 
     switch(true) {
         case content.toLowerCase() === 'i love rachel':
