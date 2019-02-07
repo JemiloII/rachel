@@ -30,9 +30,9 @@ client.on('ready', async () => {
 const handleMessage = async (message, messageUpdate = false) => {
     message = messageUpdate || message;
     const {author, channel, content} = message;
-    // if (author.client) {
-    //     return;
-    // }
+    if (author.bot) {
+        return;
+    }
 
     logger.debug(channel.name);
     logger.debug(`${author.username}: ${content}`);
