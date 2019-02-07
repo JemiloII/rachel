@@ -10,8 +10,9 @@ exports.up = knex =>
         .createTable('bumps_list', table => {
             table.integer('id').primary();
             table.integer('bump_id');
-            table.datetime('bump_at').defaults(knex.raw(`DATETIME('now', '+6 hours', 'localtime');`));
+            table.datetime('bump_at').default(knex.raw(`(datetime('now', '+6 hours', 'localtime'))`));
             table.integer('member_id');
+            table.integer('message_id');
         });
 
 exports.down = knex =>

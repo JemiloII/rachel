@@ -32,9 +32,9 @@ client.on('ready', async () => {
 const handleMessage = async (message, messageUpdate = false) => {
     message = messageUpdate || message;
     const {author, channel, content} = message;
-    // if (author.client) {
-    //     return;
-    // }
+    if (author.bot) {
+        return;
+    }
 
     logger.debug(`${channel.name}| ${author.username}: ${content}`);
 
@@ -45,7 +45,7 @@ const handleMessage = async (message, messageUpdate = false) => {
         case content.toLowerCase() === 'i think rachel is a real person':
         case content.toLowerCase() === 'i think rachel bot is a real person':
         case content.toLowerCase() === 'rachel bot is a real person':
-            logger.verbose(`${bot.user.username}: 😉`);
+            logger.verbose(`Rachel: 😉`);
             return message.reply('You can think that~ 😉');
         case content.toLowerCase() === 'hi shibi':
         case content.toLowerCase() === 'hi matt':
@@ -53,7 +53,7 @@ const handleMessage = async (message, messageUpdate = false) => {
         case content.toLowerCase() === 'hi jayxd':
             return message.channel.send(content);
         case content.toLowerCase() === 'ping':
-            logger.verbose(`${client.user.username}: pong`);
+            logger.verbose(`Rachel: pong`);
             return message.reply('pong');
         case content.startsWith('bible h '):
         case content.startsWith('bible help '):
