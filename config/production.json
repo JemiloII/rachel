@@ -1,6 +1,9 @@
 {
   "enable": {
+    "bumps": false,
+    "leagueOfLegends": true,
+    "prompt": false,
     "registration": true,
-    "bumps": false
+    "roles": true
   }
 }

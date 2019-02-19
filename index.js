@@ -36,7 +36,9 @@ const handleMessage = async (message, messageUpdate = false) => {
         return;
     }
 
-    logger.debug(`${channel.name}| ${author.username}: ${content}`);
+    if (config.get('enable.chat')) {
+        logger.debug(`${channel.name}| ${author.username}: ${content}`);
+    }
 
     switch(true) {
         case content.toLowerCase() === 'i love rachel':

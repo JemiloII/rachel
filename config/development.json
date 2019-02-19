@@ -1,6 +1,6 @@
 {
   "enable": {
-    "registration": false
+    "prompt": true
   },
   "logger": {
       "console": {

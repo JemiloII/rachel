@@ -17,8 +17,11 @@
     "useNullAsDefault": true
   },
   "enable": {
-    "registration": true,
-    "bumps": true
+    "bumps": false,
+    "leagueOfLegends": false,
+    "prompt": false,
+    "registration": false,
+    "roles": false
   },
   "leagueOfLegends": {
     "cdn":"https://ddragon.leagueoflegends.com/cdn",
