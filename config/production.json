@@ -1,6 +1,7 @@
 {
   "enable": {
     "bumps": false,
+    "chat": true,
     "leagueOfLegends": true,
     "prompt": false,
     "registration": true,
