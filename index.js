@@ -36,7 +36,8 @@ const handleMessage = async (message, messageUpdate = false) => {
         return;
     }
 
-    if (config.get('enable.chat')) {
+    if (config.get('enable.chat') && !config.get('blacklist.channels').includes(channel.id)) {
+        logger.info('Loaded Chat');
         logger.debug(`${channel.name}| ${author.username}: ${content}`);
     }
 

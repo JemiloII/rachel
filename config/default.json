@@ -2,6 +2,9 @@
   "bible": {
     "baseUrl": "https://api.esv.org"
   },
+  "blacklist": {
+    "channels": ["547462692957454351", "411645203154337792"]
+  },
   "database": {
     "debug": false,
     "client": "sqlite3",
