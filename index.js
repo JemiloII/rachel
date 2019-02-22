@@ -16,9 +16,6 @@ client.on('ready', async () => {
     logger.info(`Logged in as ${client.user.tag}!`);
 
     try {
-        let link = await client.generateInvite(['ADMINISTRATOR']);
-        logger.debug('link:', link);
-
         LeagueOfLegends.init(client);
         prompt.init(client);
         registration.init(client);
