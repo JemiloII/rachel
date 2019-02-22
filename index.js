@@ -10,7 +10,7 @@ const prompt = require('./lib/prompt');
 const LeagueOfLegends = require('./lib/league-of-legends');
 
 const client = new Discord.Client({disableEveryone: true});
-bible.setClient(client);
+logger.info(`Running in ${process.env.NODE_ENV} mode`);
 
 client.on('ready', async () => {
     logger.info(`Logged in as ${client.user.tag}!`);
@@ -21,6 +21,7 @@ client.on('ready', async () => {
         registration.init(client);
         roles.init(client);
         bumps.init(client);
+        bible.setClient(client);
     } catch (e) {
         logger.error(e);
     }
