@@ -1,6 +1,6 @@
 {
   "enable": {
-    "bumps": false,
+    "bumps": true,
     "chat": true,
     "leagueOfLegends": true,
     "prompt": false,
