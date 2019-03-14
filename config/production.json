@@ -3,6 +3,7 @@
     "bumps": true,
     "chat": true,
     "leagueOfLegends": true,
+    "lowBitRate": true,
     "prompt": false,
     "registration": true,
     "roles": true

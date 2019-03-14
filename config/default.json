@@ -23,6 +23,7 @@
     "bumps": false,
     "chat": false,
     "leagueOfLegends": false,
+    "lowBitRate": false,
     "prompt": false,
     "registration": false,
     "roles": false

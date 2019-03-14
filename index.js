@@ -8,6 +8,7 @@ const registration = require('./lib/registration');
 const roles = require('./lib/roles');
 const prompt = require('./lib/prompt');
 const LeagueOfLegends = require('./lib/league-of-legends');
+const lowBitRate = require('./lib/low-bit-rate');
 
 const client = new Discord.Client({disableEveryone: true});
 logger.info(`Running in ${process.env.NODE_ENV} mode`);
@@ -22,6 +23,7 @@ client.on('ready', async () => {
         roles.init(client);
         bumps.init(client);
         bible.setClient(client);
+        lowBitRate.init(client);
     } catch (e) {
         logger.error(e);
     }
