@@ -26,6 +26,7 @@
     "api": false,
     "bumps": false,
     "chat": false,
+    "console": false,
     "leagueOfLegends": false,
     "lowBitRate": false,
     "prompt": false,

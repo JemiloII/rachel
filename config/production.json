@@ -1,8 +1,9 @@
 {
   "enable": {
     "api": true,
-    "bumps": true,
+    "bumps": false,
     "chat": true,
+    "console": false,
     "leagueOfLegends": true,
     "lowBitRate": true,
     "prompt": false,
