@@ -1,4 +1,3 @@
-const api = require('./api');
 const bible = require('./lib/bible');
 const bumps = require('./lib/bumps');
 const config = require('config');
@@ -8,7 +7,6 @@ const logger = require('./lib/common/logger');
 const registration = require('./lib/registration');
 const roles = require('./lib/roles');
 const prompt = require('./lib/prompt');
-const LeagueOfLegends = require('./lib/league-of-legends');
 const lowBitRate = require('./lib/low-bit-rate');
 
 const client = new Discord.Client({disableEveryone: true});
@@ -18,13 +16,14 @@ client.on('ready', async () => {
     logger.info(`Logged in as ${client.user.tag}!`);
 
     try {
-        LeagueOfLegends.init(client);
+        config.get('enable.leagueOfLegends') && require('./lib/league-of-legends').init(client);
         prompt.init(client);
         registration.init(client);
         roles.init(client);
         bumps.init(client);
         bible.setClient(client);
         lowBitRate.init(client);
+        config.get('enable.api') && require('./api').listen(config.get('api.port'), () => logger.info('API Module Loaded!'));
     } catch (e) {
         logger.error(e);
     }
@@ -98,7 +97,3 @@ client.login(String(config.get('discord.token')))
     .catch(error => logger.error('Failed to login!', error));
 
 process.on('uncaughtException', error => logger.error('Caught exception:', error));
-
-if (config.get('enable.api')) {
-    api.listen(config.get('api.port'), () => logger.info('API Module Loaded!'));
-}
