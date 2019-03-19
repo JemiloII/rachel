@@ -1,5 +1,6 @@
 {
   "enable": {
+    "api": true,
     "bumps": true,
     "chat": true,
     "leagueOfLegends": true,

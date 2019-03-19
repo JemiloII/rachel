@@ -1,3 +1,4 @@
+const api = require('./api');
 const bible = require('./lib/bible');
 const bumps = require('./lib/bumps');
 const config = require('config');
@@ -93,7 +94,11 @@ client.on('messageUpdate', handleMessage);
 
 client.on('error', logger.error);
 
-client.login(config.get('discord.token'))
+client.login(String(config.get('discord.token')))
     .catch(error => logger.error('Failed to login!', error));
 
 process.on('uncaughtException', error => logger.error('Caught exception:', error));
+
+if (config.get('enable.api')) {
+    api.listen(config.get('api.port'), () => logger.info('API Module Loaded!'));
+}

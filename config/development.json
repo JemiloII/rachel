@@ -1,4 +1,7 @@
 {
+  "api": {
+    "port": 1337
+  },
   "enable": {
     "prompt": true
   },

@@ -1,4 +1,7 @@
 {
+  "api": {
+    "port": 80
+  },
   "bible": {
     "baseUrl": "https://api.esv.org"
   },
@@ -20,6 +23,7 @@
     "useNullAsDefault": true
   },
   "enable": {
+    "api": false,
     "bumps": false,
     "chat": false,
     "leagueOfLegends": false,
