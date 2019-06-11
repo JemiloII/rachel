@@ -23,6 +23,7 @@
     "useNullAsDefault": true
   },
   "enable": {
+    "anti-spam": false,
     "api": false,
     "bumps": false,
     "chat": false,

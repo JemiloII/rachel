@@ -1,3 +1,4 @@
+const antispam = require('./lib/anti-spam');
 const bible = require('./lib/bible');
 const bumps = require('./lib/bumps');
 const config = require('config');
@@ -16,6 +17,7 @@ client.on('ready', async () => {
     logger.info(`Logged in as ${client.user.tag}!`);
 
     try {
+        config.get('enable.anti-spam') && antispam.init(client);
         config.get('enable.leagueOfLegends') && require('./lib/league-of-legends').init(client);
         prompt.init(client);
         registration.init(client);
