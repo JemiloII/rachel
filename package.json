@@ -22,7 +22,7 @@
     "opusscript": "0.0.6",
     "request": "2.88.0",
     "request-promise": "4.2.2",
-    "sqlite3": "4.0.4",
+    "sqlite3": "^4.0.4",
     "winston": "2.4.2",
     "winston-daily-rotate-file": "3.1.3"
   }
