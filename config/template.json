@@ -7,5 +7,8 @@
   },
   "riot": {
     "token": "your-riotapi-token"
+  },
+  "uploadfilter": {
+    "apikey": "your-uploadfilter-apikey"
   }
 }
