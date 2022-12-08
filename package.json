@@ -15,7 +15,7 @@
     "bookshelf-camelcase": "2.0.1",
     "config": "2.0.1",
     "discord.js": "11.4.2",
-    "express": "4.16.4",
+    "express": "4.18.2",
     "ffmpeg-binaries": "4.0.0",
     "knex": "0.15.2",
     "lodash.capitalize": "4.2.1",
